@@ -28,6 +28,9 @@ fi
 # Initialize database
 flask db upgrade
 
+# Import ctfd setup
+python3 manage.py import_ctf ctfd_export.zip
+
 # Start CTFd
 echo "Starting CTFd"
 exec gunicorn 'CTFd:create_app()' \
@@ -37,3 +40,4 @@ exec gunicorn 'CTFd:create_app()' \
     --worker-class "$WORKER_CLASS" \
     --access-logfile "$ACCESS_LOG" \
     --error-logfile "$ERROR_LOG"
+
